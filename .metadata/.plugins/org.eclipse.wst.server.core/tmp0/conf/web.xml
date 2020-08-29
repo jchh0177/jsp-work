@@ -4723,4 +4723,15 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
+	<!-- HttpServlet 타입만 NEW해줌 -->
+	<!-- HttpServlet CosController = new com.cos.controller.CosServlet(); -->
+	<servlet>
+		<servlet-name>frontController</servlet-name>
+		<servlet-class>com.cos2.controller.FrontController</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>frontController</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
 </web-app>
