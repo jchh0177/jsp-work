@@ -6,12 +6,23 @@
 <meta charset="UTF-8">
 <title>메인페이지</title>
 <style>
+	body {
+		background-color:lightblue;
+	}
 	ul {
-		text-align: center;
+		text-align: right;
 	}
 	li {
 		display: inline-block;
-		width: 100px;
+		width: 70px;
+	}
+	a { 
+		color: #FFFFFF;
+	    font-size: 15px;
+		font-weight: bold; 
+	}
+	form {
+		text-align: center;
 	}
 </style>
 </head>
