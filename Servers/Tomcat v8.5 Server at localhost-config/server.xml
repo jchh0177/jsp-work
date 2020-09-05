@@ -104,7 +104,7 @@
 
 				
 				
-			<Context docBase="cos2" path="/" reloadable="true" source="org.eclipse.jst.jee.server:cos2"/></Host>
+			<Context docBase="cos3" path="/cos3" reloadable="true" source="org.eclipse.jst.jee.server:cos3"/></Host>
 		</Engine>
 	</Service>
 </Server>
