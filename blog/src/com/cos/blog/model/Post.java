@@ -11,8 +11,6 @@ public class Post {
 	
 	private int userId;
 
-	
-	
 	public Post(int id, String title, String content, int readCount, Timestamp createDate, int userId) {
 		this.id = id;
 		this.title = title;
