@@ -10,6 +10,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cos.blog.action.Action;
+import com.cos.blog.action.post.PostListAction;
+import com.cos.blog.action.post.PostSaveFormAction;
+import com.cos.blog.action.post.PostSaveProcAction;
+import com.cos.blog.action.user.UserJoinFormAction;
+import com.cos.blog.action.user.UserJoinProcAction;
+import com.cos.blog.action.user.UserLoginFormAction;
+import com.cos.blog.action.user.UserLoginProcAction;
+import com.cos.blog.action.user.UserLogoutAction;
+import com.cos.blog.action.user.UserUpdateFromAction;
+import com.cos.blog.action.user.UserUpdateProcAction;
 import com.cos.blog.model.Post;
 
 // http://localhost:8080/blog/*.do
@@ -25,26 +36,34 @@ public class PostController extends HttpServlet {
 	void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("/post 요청됨");
 		String cmd = request.getParameter("cmd");
-		if(cmd.equals("list")) {
-			response.sendRedirect("/post/list.jsp");
-		}else if(cmd.equals("detail")) {
-			
-		}
-	}
-    
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+		System.out.println("cmd : " + cmd);
+		
+		Action action = route(cmd);
+		if(action != null) action.execute(request, response);
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//request.setCharacterEncoding("UTF-8");
-		
+	private Action route(String cmd) {
+		if(cmd.equals("list")) {
+			return new PostListAction();
+		}		else if(cmd.equals("saveForm")) {
+			//회원가입 페이지로 이동 Redirect
+			return new PostSaveFormAction();
+		}else if(cmd.equals("saveProc")) {
+			//로그인 페이지로 이동 Redirect
+			return new PostSaveProcAction();
+		}
+		return null;
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// request.setCharacterEncoding("UTF-8");
 		process(request, response);
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//request.setCharacterEncoding("UTF-8");
-		
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// request.setCharacterEncoding("UTF-8");
 		process(request, response);
 	}
 

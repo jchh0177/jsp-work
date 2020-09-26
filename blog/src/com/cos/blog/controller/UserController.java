@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.cos.blog.action.Action;
-import com.cos.blog.action.UserJoinFormAction;
-import com.cos.blog.action.UserJoinProcAction;
-import com.cos.blog.action.UserLoginFormAction;
-import com.cos.blog.action.UserLoginProcAction;
-import com.cos.blog.action.UserLogoutAction;
+import com.cos.blog.action.user.UserJoinFormAction;
+import com.cos.blog.action.user.UserJoinProcAction;
+import com.cos.blog.action.user.UserLoginFormAction;
+import com.cos.blog.action.user.UserLoginProcAction;
+import com.cos.blog.action.user.UserLogoutAction;
+import com.cos.blog.action.user.UserUpdateFromAction;
+import com.cos.blog.action.user.UserUpdateProcAction;
 import com.cos.blog.dao.UserDao;
 import com.cos.blog.model.User;
 
@@ -50,6 +52,7 @@ public class UserController extends HttpServlet {
 			return new UserLoginFormAction();
 		}else if(cmd.equals("updateForm")) {
 			//로그인 페이지로 이동 Model로 이동 후 RequestDispatcher
+			return new UserUpdateFromAction();
 		}else if(cmd.equals("joinProc")) {
 			return new UserJoinProcAction();
 		}else if(cmd.equals("loginProc")) {
@@ -58,8 +61,7 @@ public class UserController extends HttpServlet {
 			// 3. 메인 페이지로 이동 Redirect
 			return new UserLoginProcAction();
 		}else if(cmd.equals("updateProc")) {
-			// 1. 회원수정 진행 (update) Model로 이동
-			// 2. 메인 페이지로 이동 Redirect
+			return new UserUpdateProcAction();
 		}else if(cmd.equals("logout")) {
 			return new UserLogoutAction();
 		}

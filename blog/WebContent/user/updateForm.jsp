@@ -1,6 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
-<button class="btn btn-info">버튼</button>
-<h1>userUpdate.jsp</h1>
+<br />
+<br />
+<div class="container">
+	<form action="/user?cmd=updateProc" method="post">
+	
+		<input type="hidden" value="${sessionScope.principal.id}" name="id"/>
+	
+		<div class="form-group">
+			<label>유저이름:</label>
+			<input type="text"  value="${sessionScope.principal.username}" class="form-control"  name="username" required="required" readonly="readonly"/>
+		</div>
+
+		<div class="form-group">
+			<label>패스워드:</label>
+			<input type="password" class="form-control" placeholder="Enter password"  name="password" required="required"/>
+		</div>
+
+		<div class="form-group">
+			<label>이메일:</label>
+			<input type="email"  value="${sessionScope.principal.email}" class="form-control" placeholder="Enter Email"  name="email" required="required"/>
+		</div>
+
+		<div class="form-group">
+			<label>주소:</label>
+			<button type="button" class="btn btn-warning float-right">주소검색</button>
+			<input type="text"  value="${sessionScope.principal.address}" class="form-control" placeholder="Enter Address"  name="address" required="required" />
+		</div>
+
+		<button type="submit" class="btn btn-primary">회원수정</button>
+	</form>
+</div>
 <%@ include file="../layout/footer.jsp"%>
