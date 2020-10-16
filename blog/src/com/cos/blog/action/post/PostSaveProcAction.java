@@ -42,7 +42,6 @@ public class PostSaveProcAction implements Action{
 			userId
 		);
 		System.out.println(post);			
-		// 1. 회원가입 진행 (insert) Model로 이동
 		PostDao postDao = new PostDao();
 		postDao.글쓰기(post);
 		

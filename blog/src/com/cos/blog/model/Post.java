@@ -20,6 +20,13 @@ public class Post {
 		this.userId = userId;
 	}
 	
+	public Post(int id, String title, String content) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+	}
+
 	public Post(String title, String content, int readCount, int userId) {
 		super();
 		this.title = title;

@@ -13,6 +13,22 @@ import com.cos.blog.model.User;
 
 public class PostDao {
 
+	public int 글수정(Post post) {
+		String sql = "UPDATE post SET title=?, content=?, createDate=now()  WHERE id=?";
+		Connection conn = DBConn.getinstance();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);		
+			pstmt.setString(1,post.getTitle());
+			pstmt.setString(2,post.getContent());
+			pstmt.setInt(3,post.getId());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}	
+	
 	public int 삭제하기(int id) {
 		String sql = "DELETE FROM post WHERE id=?";
 		Connection conn = DBConn.getinstance();

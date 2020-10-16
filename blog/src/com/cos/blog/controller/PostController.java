@@ -14,6 +14,8 @@ import com.cos.blog.action.post.PostDetailAction;
 import com.cos.blog.action.post.PostListAction;
 import com.cos.blog.action.post.PostSaveFormAction;
 import com.cos.blog.action.post.PostSaveProcAction;
+import com.cos.blog.action.post.PostUpdateFormAction;
+import com.cos.blog.action.post.PostUpdateProcAction;
 
 // http://localhost:8080/blog/*.do
 // 모든 .do 요청은 FrontController를 탐
@@ -49,6 +51,12 @@ public class PostController extends HttpServlet {
 		}else if(cmd.equals("deleteProc")) {
 			//상세 페이지로 이동 Redirect
 			return new PostDeleteProcAction();
+		}else if(cmd.equals("updateForm")) {
+			//상세 페이지로 이동 Redirect
+			return new PostUpdateFormAction();
+		}else if(cmd.equals("updateProc")) {
+			//상세 페이지로 이동 Redirect
+			return new PostUpdateProcAction();
 		}
 		return null;
 	}
