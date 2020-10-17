@@ -35,14 +35,16 @@ public class PostSaveProcAction implements Action{
 		System.out.println("title : " + title);
 		System.out.println("content : " + content);
 		
-		Post post = new Post (
-			title,
-			content,
-			0,
-			userId
-		);
+		Post post = Post.builder()
+			.title(title)
+			.content(content)
+			.readCount(0)
+			.userId(userId)
+			.build();
+			
 		System.out.println(post);			
-		PostDao postDao = new PostDao();
+		// 1. 회원가입 진행 (insert) Model로 이동
+		PostDao postDao = PostDao.getInstance();
 		postDao.글쓰기(post);
 		
 		//인덱스 페이지로 이동

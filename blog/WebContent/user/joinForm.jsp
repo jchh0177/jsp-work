@@ -22,11 +22,20 @@
 
 		<div class="form-group">
 			<label>주소:</label>
-			<button type="button" class="btn btn-warning float-right">주소검색</button>
-			<input type="text" class="form-control" placeholder="Enter Address"  name="address" />
+			<button type="button" class="btn btn-warning float-right" onclick="goPopup()">주소검색</button>
+			<input type="text" class="form-control" placeholder="Enter Address"  name="address"  id="address" readonly="readonly"/>
 		</div>
 
 		<button type="submit" class="btn btn-primary">회원가입</button>
 	</form>
 </div>
+<script>
+function goPopup(){
+	var pop = window.open("/juso/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+}
+
+function jusoCallBack(roadFullAddr){
+		document.querySelector("#address").value = roadFullAddr;
+}
+</script>
 <%@ include file="../layout/footer.jsp"%>

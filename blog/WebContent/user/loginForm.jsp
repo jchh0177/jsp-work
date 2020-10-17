@@ -7,7 +7,7 @@
 
 		<div class="form-group">
 			<label>아이디:</label>
-			<input type="text" class="form-control" placeholder="Enter ID"  name="username"/>
+			<input type="text" class="form-control" placeholder="Enter ID"  name="username" value="${cookie.remember.value}"/>
 		</div>
 
 		<div class="form-group">
@@ -17,7 +17,7 @@
 		
 		<div class="form-group form-check">
 			<label class="form-check-label">
-			<input class="form-check-input" type="checkbox"> Remember me
+			<input class="form-check-input" type="checkbox" name="remember"> Remember me
 			</label>
 		</div>
 		<button type="submit" class="btn btn-primary">로그인</button>

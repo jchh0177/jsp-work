@@ -16,14 +16,20 @@ import com.cos.blog.model.User;
 
 public class PostDeleteProcAction implements Action{
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
+	
+		// PostDao 연결
+		PostDao postDao = PostDao.getInstance();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("principal") == null) return;
+		User user =(User)session.getAttribute("principal");
 		int id = Integer.parseInt(request.getParameter("id"));
-		
+		Post post = postDao.상세보기(id);		
+		if(user.getId() !=post.getUserId()) return;
+				
 		response.setContentType("text/plain; charset=utf-8");
 		PrintWriter pw = response.getWriter();
 		
-		// PostDao 연결
-		PostDao postDao = new PostDao();
+
 		// int result = 삭제하기(id);
 		int result = postDao.삭제하기(id);
 		

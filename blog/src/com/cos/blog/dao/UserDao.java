@@ -9,7 +9,7 @@ import com.cos.blog.config.DBConn;
 import com.cos.blog.model.User;
 
 public class UserDao {
-
+	
 	public User 로그인(User user) {
 		String sql = "SELECT id,username,email,address FROM user WHERE username = ? AND password =?";
 		Connection conn = DBConn.getinstance();
@@ -20,12 +20,13 @@ public class UserDao {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				User userEntity = new User(
-						rs.getInt("id"),
-						rs.getString("username"),
-						rs.getString("email"),
-						rs.getString("address")
-				);
+				User userEntity = User.builder()
+						.id(rs.getInt("id"))
+						.username(rs.getString("username"))
+						.email(rs.getString("email"))
+						.address(rs.getString("address"))
+						.build();
+				
 				return userEntity;
 			}
 		} catch (SQLException e) {

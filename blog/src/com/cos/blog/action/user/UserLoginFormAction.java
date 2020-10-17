@@ -15,5 +15,4 @@ public class UserLoginFormAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.sendRedirect("/user/loginForm.jsp");
 	}
-
 }

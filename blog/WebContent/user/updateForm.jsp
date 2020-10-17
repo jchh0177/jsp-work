@@ -6,6 +6,7 @@
 <div class="container">
 	<form action="/user?cmd=updateProc" method="post">
 	
+		<div>
 		<input type="hidden" value="${sessionScope.principal.id}" name="id"/>
 	
 		<div class="form-group">
@@ -25,11 +26,21 @@
 
 		<div class="form-group">
 			<label>주소:</label>
-			<button type="button" class="btn btn-warning float-right">주소검색</button>
-			<input type="text"  value="${sessionScope.principal.address}" class="form-control" placeholder="Enter Address"  name="address" required="required" />
+			<button type="button" class="btn btn-warning float-right" onclick="goPopup()">주소검색</button>
+			<input type="text"  value="${sessionScope.principal.address}" class="form-control" placeholder="Enter Address"  name="address" required="required"  id="address"  readonly/>
 		</div>
 
 		<button type="submit" class="btn btn-primary">회원수정</button>
+		</div>
 	</form>
 </div>
+<script>
+function goPopup(){
+	var pop = window.open("/juso/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+}
+
+function jusoCallBack(roadFullAddr){
+		document.querySelector("#address").value = roadFullAddr;
+}
+</script>
 <%@ include file="../layout/footer.jsp"%>

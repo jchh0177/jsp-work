@@ -12,9 +12,29 @@ import com.cos.blog.model.Post;
 import com.cos.blog.model.User;
 
 public class PostDao {
+	
+	private static PostDao instance = new PostDao();
+	private PostDao() {}
+	
+	public static PostDao getInstance() {
+		return instance;
+	}
 
-	public int 글수정(Post post) {
-		String sql = "UPDATE post SET title=?, content=?, createDate=now()  WHERE id=?";
+	public int 글개수() {
+		String sql = "SELECT count(*) FROM post";
+		Connection conn = DBConn.getinstance();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);		
+			ResultSet rs = pstmt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	public int 수정하기(Post post) {
+		String sql = "UPDATE post SET title = ?, content = ? WHERE id = ? ";
 		Connection conn = DBConn.getinstance();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);		
@@ -27,7 +47,7 @@ public class PostDao {
 			e.printStackTrace();
 		}
 		return -1;
-	}	
+	}
 	
 	public int 삭제하기(int id) {
 		String sql = "DELETE FROM post WHERE id=?";
@@ -68,14 +88,15 @@ public class PostDao {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				Post post = new Post(
-						rs.getInt("id"),
-						rs.getString("title"),
-						rs.getString("content"),
-						rs.getInt("readCount"),
-						rs.getTimestamp("createDate"),
-						rs.getInt("userId")
-					);
+				Post post = Post.builder()
+						.id(rs.getInt("id"))
+						.title(rs.getString("title"))
+						.content(rs.getString("content"))
+						.readCount(rs.getInt("readCount"))
+						.createDate(rs.getTimestamp("createDate"))
+						.userId(rs.getInt("userId"))
+						.build();
+				
 				return post;
 			}					
 		} catch (Exception e) {
@@ -84,25 +105,27 @@ public class PostDao {
 		return null;
 	}
 	
-	public  List<Post> 글목록() {
+	public  List<Post> 글목록(int page) {
 		List<Post> posts = new ArrayList<>();
 		
-		String sql = "SELECT * FROM post ORDER BY id DESC";
+		String sql = "SELECT * FROM post ORDER BY id DESC limit ?,3";
 		Connection conn = DBConn.getinstance();
 		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, page);
 			ResultSet rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				Post post = new Post(
-							rs.getInt("id"),
-							rs.getString("title"),
-							rs.getString("content"),
-							rs.getInt("readCount"),
-							rs.getTimestamp("createDate"),
-							rs.getInt("userId")
-						);
+				Post post = Post.builder()
+							.id(rs.getInt("id"))
+							.title(rs.getString("title"))
+							.content(rs.getString("content"))
+							.readCount(rs.getInt("readCount"))
+							.createDate(rs.getTimestamp("createDate"))
+							.userId(rs.getInt("userId"))
+							.build();
+				
 				posts.add(post);
 			}
 			return posts;

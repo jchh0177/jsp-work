@@ -23,6 +23,14 @@
 	</c:forEach>
 
 	<br />
+	
+		<ul class="pagination justify-content-center">
+		
+		<!-- if해서 lastpage, param.page 값비교해서 동일하면 Next는 disabled 되야함, prev는 param=0이면 disabled -->
+		<li class="page-item"><a class="page-link" href="/post?cmd=list&page=${param.page-1}">Prev</a></li>
+		<li class="page-item"><a class="page-link" href="/post?cmd=list&page=${param.page+1}">Next</a></li>
+	</ul>
+	<br />
 </div>
 
 <%@ include file="../layout/footer.jsp"%>
